@@ -170,6 +170,16 @@ If you decide to run FSW in Docker on Windows/WSL, you will need to disable the 
 
 Docker in Windows will not work with setschedparam so FSW will fail. To stop it from enforcing this feature, set `OSAL_CONFIG_DEBUG_PERMISSIVE_MODE = TRUE` in `nos3/fsw/osal/default_config.cmake`.
 
+Since we are running on a Pi headless, we need to create virtual display.
+
+```bash
+sudo apt install xvfb
+Xvfb :1 -screen 0 1024x768x16 &
+export DISPLAY=:1
+```
+
+
+
 ```cmake
 set(OSAL_CONFIG_DEBUG_PERMISSIVE_MODE           TRUE
     CACHE BOOL "Disable enforcement of privileged operations"
